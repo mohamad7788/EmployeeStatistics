@@ -81,7 +81,7 @@ class Solution {
         // Creating the map EmplployeeID->department
         // And create and init the EmployeeState Map : counting the employees in each department
         for (String employee : employees) {
-            String[] employeeDetails = employee.split(delimiter);
+            String[] employeeDetails = employee.split(delimiter);       // <id,name,department> <1,Richard,Engineering>
             String employeeID = employeeDetails[0];
             String employeeDepartment = employeeDetails[2];
             employeeCompanyMap.put(employeeID, employeeDepartment);
@@ -94,13 +94,13 @@ class Solution {
             employeeStatsMap.put(employeeDepartment, employeeStats);
         }
         for (String relation : friendships) {
-            String[] strings = relation.split(delimiter);
-            Helpers.Pair<String, String> relationPair = new Helpers.Pair<>(strings[0], strings[1]);
+            String[] pairStr = relation.split(delimiter);
+            Helpers.Pair<String, String> relationPair = new Helpers.Pair<>(pairStr[0], pairStr[1]);
             String department1 = employeeCompanyMap.get(relationPair.getFirst());
             String department2 = employeeCompanyMap.get(relationPair.getSecond());
             EmployeeStats employeeStats = employeeStatsMap.get(department1);
             if (employeeStats != null) {
-                if (!department1.equals(department2)) {
+                if (!department1.equals(department2)) {     // if two departments different then the relation is defined as outsidefriends then updating the field employeesWithOutsideFriends
                     employeeStats.employeesWithOutsideFriends++;
                     employeeStatsMap.put(department1, employeeStats);
                 }
